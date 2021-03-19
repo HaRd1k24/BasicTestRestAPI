@@ -1,0 +1,66 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "io.qameta.allure:allure-gradle:2.3"
+    }
+}
+
+
+plugins {
+    id 'java'
+    id "io.qameta.allure" version "2.8.1"
+    id 'idea'
+    id 'groovy'
+}
+apply plugin: "io.qameta.allure"
+
+compileJava.options.encoding = 'UTF-8'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+allure {
+    version = '2.2.1'
+    autoconfigure = true
+    aspectjweaver = true
+    allureJavaVersion = '2.7.0'
+
+    useJUnit5 {
+        version = '2.7.0' // Latest Allure Version
+    }
+
+}
+
+repositories {
+
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'com.sun.xml.ws', name: 'jaxws-rt', version: '2.3.0.2'
+    compile group: 'com.sun.xml.ws', name: 'jaxws-rt', version: '2.3.0.2'
+
+    compile group: 'org.glassfish.jaxb', name: 'jaxb-core', version: '2.2.11'
+    implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:1.7.0'
+    testCompile 'com.codeborne:selenide:5.19.0'
+    implementation group: 'io.qameta.allure', name: 'allure-junit5', version: '2.13.8'
+    testImplementation 'io.rest-assured:rest-assured:4.3.3'
+    testImplementation 'io.rest-assured:json-path:4.3.3'
+    testImplementation 'io.rest-assured:xml-path:4.3.3'
+    testImplementation 'io.rest-assured:json-schema-validator:4.3.3'
+    testImplementation 'io.rest-assured:spring-web-test-client:4.3.3'
+    testImplementation 'io.rest-assured:scala-support:4.3.3'
+    testImplementation 'io.rest-assured:kotlin-extensions:4.3.3'
+}
+
+test {
+    useJUnitPlatform()
+}
